@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b10">
+<title>Paolo Maldini & Gianluigi Buffon | The Legends</title>
+<style>
+:root{
+  --bg:#090b10;--panel:#131821;--panel2:#1a202b;--gold:#d8bd75;
+  --red:#a51f32;--text:#f4f1e9;--muted:#b9bdc7;--line:rgba(216,189,117,.32);
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.7}
+body.locked{overflow:hidden}
+a{color:var(--gold)}
+img{display:block;max-width:100%}
+button{font:inherit}
+#welcome{
+  position:fixed;inset:0;z-index:1000;display:grid;place-items:center;
+  padding:24px;background:#07090d;overflow:hidden;
+}
+.welcome-photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;
+  opacity:.56;filter:brightness(.72) contrast(1.08);
+}
+.welcome-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,10,.88),rgba(4,6,10,.25)),linear-gradient(0deg,rgba(4,6,10,.92),transparent 65%)}
+.welcome-content{position:relative;z-index:1;width:min(850px,100%);text-align:center;padding:30px 18px}
+.welcome-kicker{color:var(--gold);letter-spacing:5px;font-size:.78rem;font-weight:bold}
+.welcome-content h1{font-size:clamp(2.5rem,9vw,6.5rem);line-height:1.05;letter-spacing:clamp(3px,1vw,10px);margin:16px 0;color:#fff}
+.welcome-sub{font-size:clamp(1rem,3vw,1.35rem);letter-spacing:3px;color:var(--gold);font-weight:bold}
+.welcome-text{max-width:650px;margin:22px auto;color:#f0eee8;font-size:1rem}
+.enter-btn{
+  margin-top:18px;padding:14px 28px;border:1px solid var(--gold);border-radius:3px;
+  background:linear-gradient(120deg,#8d192c,#4d111e);color:white;font-weight:bold;
+  letter-spacing:2px;cursor:pointer;transition:.2s
+}
+.enter-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px #0008}
+header{padding:42px 16px 32px;text-align:center;background:radial-gradient(ellipse at top,#24202a,#0a0c11 72%);border-bottom:1px solid var(--line)}
+.brand-mark{color:var(--gold);font-size:.75rem;letter-spacing:5px;font-weight:bold}
+header h1{margin:8px 0;color:#fff;font-size:clamp(2rem,7vw,4.2rem);letter-spacing:clamp(3px,1vw,8px);line-height:1.1}
+header p{margin:8px 0 0;color:var(--muted);letter-spacing:3px}
+nav{
+  position:sticky;top:0;z-index:50;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
+  gap:6px;padding:12px 10px;background:rgba(10,12,17,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)
+}
+nav a{padding:9px 13px;color:var(--gold);text-decoration:none;font-size:.82rem;font-weight:bold;letter-spacing:1px;border-radius:3px}
+nav a:hover,nav a:focus{background:var(--red);color:white}
+main{width:min(1100px,100%);margin:auto;padding:10px 18px 40px}
+section{padding:38px 0;scroll-margin-top:80px}
+.section-heading{text-align:center;margin-bottom:24px}
+.section-heading .eyebrow{color:var(--gold);font-size:.72rem;letter-spacing:4px;font-weight:bold}
+h2{color:var(--gold);font-size:clamp(1.5rem,4vw,2.25rem);letter-spacing:2px;line-height:1.25;margin:8px 0}
+h3{color:#f3dfaa;margin:8px 0}
+p{color:#e2e3e6}
+.intro-strip{border:1px solid var(--line);border-left:4px solid var(--red);background:var(--panel);padding:20px;border-radius:8px;text-align:center}
+.card{
+  background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);
+  border-radius:12px;padding:clamp(16px,3vw,24px);margin:20px 0;text-align:left;
+  box-shadow:0 12px 28px rgba(0,0,0,.16)
+}
+.card p:last-child{margin-bottom:0}
+.card h2,.card .center{text-align:center}
+.video-card iframe,.card iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;background:#000;margin-top:10px}
+.video-link,.text-link{
+  display:inline-block;margin-top:12px;padding:10px 15px;border:1px solid var(--gold);
+  border-radius:4px;color:var(--gold);text-decoration:none;font-weight:bold;font-size:.85rem;letter-spacing:.7px
+}
+.video-link:hover,.text-link:hover{background:var(--gold);color:#111}
+.video-note{font-size:.88rem;color:var(--muted)}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.gallery-item{overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:0}
+.gallery-item img{width:100%;height:270px;object-fit:cover;background:#171b22;transition:transform .35s}
+.gallery-item:hover img{transform:scale(1.035)}
+.gallery-item figcaption{padding:12px 14px;color:#e9dfc7;font-size:.9rem}
+.gallery-item figcaption a{font-size:.78rem;display:block;margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.stat{background:#171b23;border:1px solid var(--line);border-radius:9px;padding:15px 8px;text-align:center}
+.stat strong{display:block;color:var(--gold);font-size:clamp(1.4rem,4vw,2rem)}
+.stat span{display:block;color:var(--muted);font-size:.78rem}
+.subsection-title{margin:30px 0 14px;text-align:center;color:var(--gold);letter-spacing:2px}
+.notice{font-size:.84rem;color:var(--muted);background:#11151d;border:1px solid #343b48;border-radius:8px;padding:14px}
+#backTop{
+  position:fixed;right:16px;bottom:16px;z-index:40;width:46px;height:46px;border:1px solid var(--gold);
+  border-radius:50%;background:#171b23;color:var(--gold);font-size:1.25rem;cursor:pointer;display:none
+}
+footer{padding:32px 18px;text-align:center;background:#07090d;border-top:1px solid var(--line)}
+footer strong{color:var(--gold);letter-spacing:3px}
+footer p{font-size:.82rem;color:var(--muted);max-width:760px;margin:10px auto}
+@media(max-width:650px){
+  nav{gap:2px;padding:8px 4px}
+  nav a{font-size:.72rem;padding:8px 9px}
+  main{padding-left:13px;padding-right:13px}
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item img{height:230px}
+  .stats{gap:7px}
+  .stat{padding:12px 5px}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- WELCOME SCREEN: this screen intentionally shows Paolo Maldini only -->
+<div id="welcome" aria-label="Welcome screen">
+  <img class="welcome-photo"
+       src="https://commons.wikimedia.org/wiki/Special:FilePath/Paolo%20Maldini%202009.jpg"
+       alt="Paolo Maldini"
+       fetchpriority="high">
+  <div class="welcome-shade"></div>
+  <div class="welcome-content">
+    <div class="welcome-kicker">A TRIBUTE TO A FOOTBALL ICON</div>
+    <h1>PAOLO MALDINI</h1>
+    <div class="welcome-sub">A LEGEND. A CAPTAIN. FOREVER.</div>
+    <p class="welcome-text">
+      این یک وب‌سایت هواداری مستقل است که به افتخار پائولو مالدینی و جان‌لوئیجی بوفون ساخته شده؛
+      دو اسطورهٔ فوتبال که با رهبری، وفاداری و لحظه‌های فراموش‌نشدنی خود در تاریخ این ورزش ماندگار شدند.
+    </p>
+    <button class="enter-btn" id="enterSite">ENTER THE WEBSITE</button>
+  </div>
+</div>
+
+<header id="top">
+  <div class="brand-mark">A TRIBUTE TO TWO FOOTBALL ICONS</div>
+  <h1>THE LEGENDS</h1>
+  <p>PAOLO MALDINI · GIANLUIGI BUFFON</p>
+</header>
+
+<nav aria-label="Main navigation">
+  <a href="#home">HOME</a>
+  <a href="#maldini-life">MALDINI</a>
+  <a href="#maldini-gallery">MALDINI GALLERY</a>
+  <a href="#buffon">BUFFON</a>
+  <a href="#buffon-gallery">BUFFON GALLERY</a>
+</nav>
+
+<main>
+<section id="home">
+  <div class="section-heading">
+    <div class="eyebrow">WELCOME TO THE LEGENDS</div>
+    <h2>TWO CAREERS. ONE LOVE FOR FOOTBALL.</h2>
+  </div>
+  <div class="intro-strip">
+    این وب‌سایت برای بزرگداشت دو چهرهٔ ماندگار فوتبال ساخته شده است؛
+    پائولو مالدینی، نماد دفاع و وفاداری، و جان‌لوئیجی بوفون، نماد رهبری و دروازه‌بانی.
+  </div>
+</section>
+
+<section id="maldini-life">
+  <div class="section-heading">
+    <div class="eyebrow">AC MILAN · NUMBER 3</div>
+    <h2>THE LIFE OF PAOLO MALDINI</h2>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong>902</strong><span>Official Milan appearances</span></div>
+    <div class="stat"><strong>26</strong><span>Trophies with Milan</span></div>
+    <div class="stat"><strong>25</strong><span>Years with the first team</span></div>
+  </div>
+
+  <div class="card">
+    <h3>PAOLO MALDINI</h3>
+    <h3>داستان یک اسطوره؛ از میلان تا جاودانگی</h3>
+    <p>پائولو مالدینی در ۲۶ ژوئن ۱۹۶۸ در شهر میلان ایتالیا متولد شد. او در خانواده‌ای فوتبالی بزرگ شد؛ پدرش، چزاره مالدینی، بازیکن و کاپیتان سابق میلان بود.</p>
+    <p>شاید کمتر کسی در آن زمان تصور می‌کرد پسری که در شهر میلان بزرگ می‌شود، روزی به یکی از بزرگ‌ترین مدافعان تاریخ فوتبال تبدیل شود؛ بازیکنی که نامش برای همیشه با پیراهن قرمز و مشکی میلان گره بخورد.</p>
+  </div>
+  <div class="card">
+    <h3>THE BEGINNING — اولین قدم‌ها در میلان</h3>
+    <p>مالدینی فوتبال حرفه‌ای خود را در باشگاهی آغاز کرد که قرار بود تمام دوران بازیگری‌اش را در آن سپری کند.</p>
+    <p>او در ۲۰ ژانویه ۱۹۸۵، در حالی که تنها ۱۶ سال داشت، نخستین بازی رسمی خود را برای تیم بزرگسالان میلان مقابل اودینزه انجام داد.</p>
+    <p>از همان سال، مسیر طولانی و پرافتخار او آغاز شد؛ مسیری که بیش از دو دهه ادامه پیدا کرد.</p>
+  </div>
+  <div class="card">
+    <h3>THE RISE OF A DEFENDER — ظهور یک مدافع بزرگ</h3>
+    <p>مالدینی در ابتدا بیشتر در پست مدافع چپ بازی می‌کرد، اما بعدها در قلب خط دفاع نیز به یکی از بهترین‌های جهان تبدیل شد.</p>
+    <p>هوش دفاعی، زمان‌بندی دقیق، آرامش، جای‌گیری فوق‌العاده و توانایی خواندن بازی، از مهم‌ترین ویژگی‌های او بودند.</p>
+    <p>او فقط با قدرت بدنی یا تکل‌های سخت دفاع نمی‌کرد؛ بسیاری از مواقع، پیش از آنکه مهاجم بتواند خطر ایجاد کند، مسیر حرکت او را تشخیص می‌داد و حمله را متوقف می‌کرد.</p>
+  </div>
+  <div class="card">
+    <h3>THE CAPTAIN OF MILAN — کاپیتان میلان؛ نماد وفاداری</h3>
+    <p>در سال ۱۹۹۷، پس از فرانکو بارزی، بازوبند کاپیتانی میلان به مالدینی رسید.</p>
+    <p>او به‌تدریج به نماد رهبری و وفاداری در این باشگاه تبدیل شد.</p>
+    <p>مالدینی در تمام دوران بازیگری باشگاهی خود فقط پیراهن میلان را پوشید. او در ۹۰۲ مسابقه رسمی برای این تیم به میدان رفت و ۳۳ گل به ثمر رساند.</p>
+  </div>
+  <div class="card">
+    <h3>EUROPEAN NIGHTS — شب‌های فراموش‌نشدنی اروپا</h3>
+    <p>یکی از مهم‌ترین بخش‌های زندگی فوتبالی مالدینی، موفقیت‌های او در رقابت‌های اروپایی بود.</p>
+    <p>او پنج بار قهرمان جام باشگاه‌های اروپا و لیگ قهرمانان شد:</p>
+    <p><strong>۱۹۸۹ · ۱۹۹۰ · ۱۹۹۴ · ۲۰۰۳ · ۲۰۰۷</strong></p>
+    <p>قهرمانی سال ۲۰۰۳ در منچستر، اهمیت ویژه‌ای داشت؛ جایی که میلان در فینال مقابل یوونتوس به پیروزی رسید و مالدینی جام قهرمانی را بالای سر برد.</p>
+    <p>در سال ۲۰۰۵ نیز او در فینال مقابل لیورپول گلزنی کرد؛ فینالی که با وجود شروع درخشان میلان، در نهایت با قهرمانی لیورپول به پایان رسید.</p>
+    <p>اما مالدینی و میلان در سال ۲۰۰۷ دوباره به فینال رسیدند و این بار انتقام آن شکست را از لیورپول گرفتند.</p>
+  </div>
+  <div class="card">
+    <h3>ITALIAN NATIONAL TEAM — افتخار پوشیدن پیراهن ایتالیا</h3>
+    <p>مالدینی در کنار درخشش در میلان، سال‌های زیادی نیز برای تیم ملی ایتالیا بازی کرد.</p>
+    <p>او بین سال‌های ۱۹۸۸ تا ۲۰۰۲، ۱۲۶ بار پیراهن تیم ملی کشورش را پوشید و در چهار دوره جام جهانی حضور داشت:</p>
+    <p><strong>۱۹۹۰ · ۱۹۹۴ · ۱۹۹۸ · ۲۰۰۲</strong></p>
+    <p>ایتالیا در جام جهانی ۱۹۹۴ به فینال رسید و نایب‌قهرمان شد. مالدینی همچنین در یورو ۲۰۰۰ با ایتالیا به مقام نایب‌قهرمانی رسید.</p>
+  </div>
+  <div class="card">
+    <h3>THE LAST MATCH — آخرین مسابقه؛ پایان یک دوران</h3>
+    <p>در سال ۲۰۰۹، پس از ۲۵ سال حضور در تیم اصلی میلان، مالدینی از فوتبال حرفه‌ای خداحافظی کرد.</p>
+    <p>او در آخرین فصل دوران بازیگری‌اش همچنان بازیکنی تأثیرگذار بود و در پایان، با آماری ماندگار از فوتبال خداحافظی کرد:</p>
+    <p><strong>۹۰۲ مسابقه رسمی برای میلان، ۳۳ گل و ۲۶ جام کسب‌شده با این باشگاه.</strong></p>
+  </div>
+  <div class="card">
+    <h3>BACK TO MILAN — بازگشت به خانه</h3>
+    <p>داستان مالدینی با پایان دوران بازیگری‌اش تمام نشد.</p>
+    <p>او در سال ۲۰۱८ به میلان بازگشت و مسئولیت‌های مدیریتی را بر عهده گرفت. در سال ۲۰۱۹ مدیر فنی باشگاه شد و در سال ۲۰۲۲، در دوران مدیریت او، میلان قهرمان سری آ شد.</p>
+    <p>او در تابستان ۲۰۲۳ از میلان جدا شد.</p>
+  </div>
+  <div class="card">
+    <h3>THE LEGACY — میراثی فراتر از جام‌ها</h3>
+    <p>پائولو مالدینی فقط به‌خاطر جام‌ها و رکوردهایش به یاد آورده نمی‌شود.</p>
+    <p>او برای بسیاری از علاقه‌مندان فوتبال، نماد وفاداری به یک باشگاه، احترام به رقبا، رهبری و هنر دفاع کردن است.</p>
+    <p>او نشان داد که یک مدافع بزرگ برای تأثیرگذاری در فوتبال، همیشه به گلزنی یا حرکات نمایشی نیاز ندارد.</p>
+    <h2 class="center">PAOLO MALDINI</h2>
+    <h3 class="center">FOREVER A LEGEND</h3>
+    <p>۹۰۲ مسابقه، ۲۶ جام و ۲۵ سال با پیراهن میلان؛ این فقط بخشی از داستان مردی است که شماره ۳ او برای همیشه در تاریخ باشگاه جاودانه شد.</p>
+  </div>
+</section>
+
+<section id="maldini-gallery">
+  <div class="section-heading">
+    <div class="eyebrow">RED AND BLACK MEMORIES</div>
+    <h2>PAOLO MALDINI — PHOTO GALLERY</h2>
+  </div>
+  <div class="gallery-grid">
+    <figure class="gallery-item">
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Paolo%20Maldini%202009.jpg" alt="Paolo Maldini in 2009">
+      <figcaption>Paolo Maldini — 2009<br>
+        Photo: Christophe95<br>
+        License: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Paolo_Maldini_2009.jpg" target="_blank" rel="noopener">Original photo and author details</a>
+      </figcaption>
+    </figure>
+    <figure class="gallery-item">
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/A.C.%20Milan%20lifting%20the%20European%20Cup%20after%20winning%20the%202002%E2%80%9303%20UEFA%20Champions%20League%20-%2020030528.jpg" alt="AC Milan lifting the European Cup in 2003">
+      <figcaption>AC Milan — 2003 Champions League triumph<br>
+        Photo: Soccer illustrated<br>
+        License: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:A.C._Milan_lifting_the_European_Cup_after_winning_the_2002%E2%80%9303_UEFA_Champions_League_-_20030528.jpg" target="_blank" rel="noopener">Original photo and author details</a>
+      </figcaption>
+    </figure>
+    <figure class="gallery-item">
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/AC%20Milan%20team%20celebrate.jpg" alt="AC Milan celebrating the 2007 Champions League victory in Athens">
+      <figcaption>AC Milan — Athens, 2007<br>
+        Photo: Antigoni<br>
+        License: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:AC_Milan_team_celebrate.jpg" target="_blank" rel="noopener">Original photo and author details</a>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+
+
+
+
+<section id="buffon">
+  <div class="section-heading">
+    <div class="eyebrow">ITALY · PARMA · JUVENTUS</div>
+    <h2>GIANLUIGI BUFFON</h2>
+    <p>THE LEGENDARY GOALKEEPER · NUMBER 1</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong>2006</strong><span>World Cup champion</span></div>
+    <div class="stat"><strong>28</strong><span>Years as a professional</span></div>
+    <div class="stat"><strong>2023</strong><span>Retired from football</span></div>
+  </div>
+  <div class="card">
+    <h3>THE LIFE OF GIANLUIGI BUFFON</h3>
+    <h3>داستان مردی که دروازه‌اش را تسخیرناپذیر کرد</h3>
+    <h3>آغاز یک رؤیا</h3>
+    <p>جان‌لوئیجی بوفون در ۲۸ ژانویهٔ ۱۹۷۸ در شهر کارارا ایتالیا متولد شد. او در خانواده‌ای ورزشی بزرگ شد و از همان دوران کودکی علاقهٔ زیادی به فوتبال داشت.</p>
+    <p>جالب است که بوفون در ابتدای مسیر فوتبالی خود در پست‌های دیگری بازی می‌کرد؛ اما به‌تدریج تصمیم گرفت مسیرش را درون دروازه ادامه دهد.</p>
+    <h3>شروع دوران حرفه‌ای</h3>
+    <p>بوفون در سال ۱۹۹۵ و در سن ۱۷ سالگی نخستین بازی خود در سری آ را با پیراهن پارما انجام داد. او در همان مسابقه مقابل میلان نمایشی فوق‌العاده داشت و توجه فوتبال‌دوستان را به خود جلب کرد.</p>
+    <h3>درخشش در پارما</h3>
+    <p>دوران حضور بوفون در پارما نقطهٔ شروع شهرت او بود. او همراه این تیم در سال ۱۹۹۹ قهرمان جام یوفا، جام حذفی ایتالیا و سوپرجام ایتالیا شد.</p>
+    <p>عملکرد درخشانش باعث شد به یکی از موردتوجه‌ترین دروازه‌بان‌های فوتبال اروپا تبدیل شود.</p>
+    <h3>انتقال بزرگ به یوونتوس</h3>
+    <p>در سال ۲۰۰۱، بوفون با انتقالی بزرگ به یوونتوس پیوست. او خیلی زود به یکی از ستون‌های اصلی تیم تبدیل شد و سال‌ها از دروازهٔ این باشگاه محافظت کرد.</p>
+    <p>بوفون با واکنش‌های سریع، شجاعت، تمرکز، رهبری و قدرت تصمیم‌گیری خود به یکی از بهترین دروازه‌بان‌های نسلش تبدیل شد.</p>
+    <h3>قهرمانی جهان در سال ۲۰۰۶</h3>
+    <p>یکی از درخشان‌ترین لحظات زندگی حرفه‌ای بوفون در جام جهانی ۲۰۰۶ رقم خورد. او دروازه‌بان اصلی تیم ملی ایتالیا بود و نقش مهمی در قهرمانی این تیم داشت.</p>
+    <p>ایتالیا در آن مسابقات تنها دو گل دریافت کرد که یکی از آن‌ها گل به خودی و دیگری پنالتی بود. بوفون همچنین جایزهٔ بهترین دروازه‌بان جام جهانی را دریافت کرد.</p>
+    <h3>سال‌های وفاداری</h3>
+    <p>با وجود فراز و نشیب‌های فراوان، بوفون در سال ۲۰۰۶ پس از سقوط یوونتوس به سری B نیز در این باشگاه ماند و همراه تیم برای بازگشت به سطح اول فوتبال ایتالیا تلاش کرد.</p>
+    <p>این تصمیم یکی از نمادهای وفاداری او به یوونتوس بود.</p>
+    <h3>بازگشت به پارما و پایان دوران بازی</h3>
+    <p>بوفون پس از سال‌ها حضور در بالاترین سطح فوتبال، در سال ۲۰۲۱ دوباره به پارما بازگشت؛ همان باشگاهی که دوران حرفه‌ای‌اش را در آن آغاز کرده بود.</p>
+    <p>او در سال ۲۰۲۳ از فوتبال حرفه‌ای خداحافظی کرد و به دوران پرافتخار خود پایان داد.</p>
+    <h3>میراث یک اسطوره</h3>
+    <p>جان‌لوئیجی بوفون فقط یک دروازه‌بان بزرگ نبود؛ او نماد اعتمادبه‌نفس، رهبری، استمرار و عشق به فوتبال بود.</p>
+    <p>او در طول دوران حرفه‌ای خود صدها مسابقه بزرگ انجام داد و برای میلیون‌ها هوادار فوتبال به الگویی فراموش‌نشدنی تبدیل شد.</p>
+    <h2 class="center">GIANLUIGI BUFFON</h2>
+    <h3 class="center">FOREVER NUMBER ONE</h3>
+  </div>
+</section>
+
+<section id="buffon-gallery">
+  <div class="section-heading">
+    <div class="eyebrow">AZZURRI MEMORIES</div>
+    <h2>BUFFON — PHOTO GALLERY</h2>
+  </div>
+  <div class="gallery-grid">
+    <figure class="gallery-item">
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Italy%20vs%20France%20-%20FIFA%20World%20Cup%202006%20final%20-%20Gianluigi%20Buffon.jpg" alt="Gianluigi Buffon during the 2006 World Cup final">
+      <figcaption>Gianluigi Buffon — 2006 World Cup final<br>
+        Original photo: David Ruddell · Derivative work: Danyele<br>
+        License: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Italy_vs_France_-_FIFA_World_Cup_2006_final_-_Gianluigi_Buffon.jpg" target="_blank" rel="noopener">Original photo, edit and author details</a>
+      </figcaption>
+    </figure>
+    <figure class="gallery-item">
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/2006%20FIFA%20World%20Cup%20-%20Italy%20-%20Buffon%2C%20Materazzi%20and%20Perrotta.jpg" alt="Buffon, Materazzi and Perrotta celebrating Italy's 2006 World Cup victory">
+      <figcaption>Buffon, Materazzi and Perrotta — 2006<br>
+        Photo: Olaf Nordwich<br>
+        License: <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:2006_FIFA_World_Cup_-_Italy_-_Buffon,_Materazzi_and_Perrotta.jpg" target="_blank" rel="noopener">Original photo and author details</a>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+
+
+<div class="notice">
+  <strong>About this website:</strong> This is an unofficial fan-made tribute website. It is not affiliated with or endorsed by AC Milan, Juventus, UEFA, FIFA, Paolo Maldini or Gianluigi Buffon. Images remain the property of their respective owners. Image credits and license links are provided below. Please check each image's license and attribution requirements before public use.
+</div>
+</main>
+
+<footer>
+  <strong>THE LEGENDS NEVER FADE</strong>
+  <p>Unofficial fan-made website dedicated to Paolo Maldini and Gianluigi Buffon.</p>
+  <p>All rights belong to their respective owners.</p>
+</footer>
+
+<button id="backTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<script>
+const enterButton = document.getElementById('enterSite');
+const welcomeScreen = document.getElementById('welcome');
+enterButton.addEventListener('click', () => {
+  welcomeScreen.style.display = 'none';
+  document.body.classList.remove('locked');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.style.display = window.scrollY > 450 ? 'block' : 'none';
+});
+backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+</body>
+</html>
