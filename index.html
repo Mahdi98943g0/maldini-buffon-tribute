@@ -1192,6 +1192,415 @@ button {position:fixed;bottom:20px;left:20px;border:1px solid var(--gold);backgr
 
 </section>
 
+<style>
+#legends-museum {
+  --gold:#d8b45a;
+  --red:#9e3030;
+  background:#080a0f;
+  color:#f4f0e7;
+  padding:28px 16px;
+  border:1px solid #9e7b38;
+  border-radius:18px;
+  font-family:Arial,sans-serif;
+  overflow:hidden;
+  text-align:center;
+}
+#legends-museum * {box-sizing:border-box}
+#legends-museum h2,
+#legends-museum h3 {color:var(--gold)}
+#legends-museum .lm-hero {
+  padding:55px 10px;
+  background:radial-gradient(ellipse,#49371b 0%,#11131a 48%,#080a0f 78%);
+  border-radius:16px;
+  animation:lmReveal 2s ease;
+}
+#legends-museum .lm-hero h1 {
+  font-size:clamp(35px,8vw,65px);
+  letter-spacing:5px;
+  color:#e8c66e;
+  text-shadow:0 0 25px #d8a94a;
+  margin:10px 0;
+}
+#legends-museum .lm-hero p {color:#d3c8ae}
+#legends-museum button {
+  background:linear-gradient(135deg,#e8c66e,#9c702a);
+  color:#100e09;
+  border:0;
+  border-radius:9px;
+  padding:12px 18px;
+  margin:7px;
+  font-weight:bold;
+  cursor:pointer;
+}
+#legends-museum .lm-section {
+  margin-top:35px;
+  padding:20px 10px;
+  border-top:1px solid #594622;
+}
+#legends-museum .lm-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+#legends-museum .lm-card {
+  background:linear-gradient(145deg,#1c1d21,#101115);
+  border:1px solid #5c4827;
+  border-radius:13px;
+  padding:19px;
+  text-align:left;
+  transition:.3s;
+}
+#legends-museum .lm-card:hover {
+  transform:translateY(-5px);
+  border-color:var(--gold);
+  box-shadow:0 8px 25px #000;
+}
+#legends-museum .lm-card p {
+  color:#c7c2b8;
+  line-height:1.8;
+}
+#legends-museum .lm-number {
+  color:#d8b45a;
+  font-size:30px;
+  font-weight:bold;
+}
+#legends-museum .lm-hall {
+  perspective:700px;
+  padding:25px 5px;
+}
+#legends-museum .lm-stage {
+  min-height:190px;
+  border:1px solid #b18b42;
+  border-radius:15px;
+  background:linear-gradient(135deg,#302414,#11131a);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  transform:rotateX(3deg);
+  box-shadow:0 15px 35px #000;
+  transition:.5s;
+}
+#legends-museum .lm-stage strong {
+  font-size:clamp(25px,6vw,42px);
+  color:var(--gold);
+  letter-spacing:3px;
+}
+#legends-museum .lm-stage span {
+  color:#d4c9b2;
+  margin-top:12px;
+}
+#legends-museum .lm-controls {margin-top:15px}
+#legends-museum .lm-film {
+  background:#14151a;
+  border:1px solid #65502c;
+  border-radius:12px;
+  padding:20px;
+  margin:10px 0;
+}
+#legends-museum .lm-film a {
+  color:#e5c16b;
+  text-decoration:none;
+}
+#legends-museum .lm-footer {
+  padding:30px 10px 10px;
+  color:#9b8d70;
+  font-size:13px;
+}
+@keyframes lmReveal {
+  from {opacity:0;transform:translateY(20px)}
+  to {opacity:1;transform:translateY(0)}
+}
+@media(max-width:500px) {
+  #legends-museum {padding:16px 10px}
+  #legends-museum .lm-card {padding:15px}
+}
+</style>
+
+<section id="legends-museum">
+
+  <div class="lm-hero">
+    <p>THE HOME OF FOOTBALL GREATNESS</p>
+    <h1>THE LEGENDS</h1>
+    <h2>MALDINI & BUFFON</h2>
+    <p>Two Icons. Two Careers. One Eternal Legacy.</p>
+    <button type="button" id="lm-enter">ENTER THE MUSEUM</button>
+    <br>
+    <button type="button" id="lm-sound">♫ SOUND: OFF</button>
+    <p style="font-size:12px">Original cinematic browser soundtrack</p>
+  </div>
+
+  <div class="lm-section">
+    <h2>THE IMMORTAL HALL</h2>
+    <p>دو اسطوره، دو مسیر متفاوت و یک میراث فراموش‌نشدنی.</p>
+    <div class="lm-hall">
+      <div class="lm-stage" id="lm-stage">
+        <strong>THE LEGENDS</strong>
+        <span>PAOLO MALDINI · GIANLUIGI BUFFON</span>
+      </div>
+      <div class="lm-controls">
+        <button type="button" id="lm-prev">◀ PREVIOUS</button>
+        <button type="button" id="lm-next">NEXT ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="lm-section">
+    <h2>THE TWO ICONS</h2>
+    <div class="lm-grid">
+      <article class="lm-card">
+        <div class="lm-number">01</div>
+        <h3>PAOLO MALDINI</h3>
+        <p>پائولو مالدینی، نماد وفاداری و ثبات در فوتبال؛ مدافعی که بخش بزرگی از دوران حرفه‌ای خود را در میلان گذراند و به یکی از چهره‌های ماندگار تاریخ فوتبال تبدیل شد.</p>
+        <p><b>Position:</b> Defender</p>
+        <p><b>Club:</b> AC Milan</p>
+        <p><b>Legacy:</b> Leadership & Loyalty</p>
+      </article>
+      <article class="lm-card">
+        <div class="lm-number">02</div>
+        <h3>GIANLUIGI BUFFON</h3>
+        <p>جان‌لوئیجی بوفون، یکی از بزرگ‌ترین دروازه‌بان‌های تاریخ؛ با واکنش‌های درخشان، رهبری در زمین و سال‌ها حضور در بالاترین سطح فوتبال جهان.</p>
+        <p><b>Position:</b> Goalkeeper</p>
+        <p><b>Clubs:</b> Juventus & Parma</p>
+        <p><b>Legacy:</b> Courage & Consistency</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="lm-section">
+    <h2>THE LEGACY OF MALDINI</h2>
+    <div class="lm-grid">
+      <article class="lm-card">
+        <h3>DEFENSIVE ART</h3>
+        <p>مالدینی به‌خاطر زمان‌بندی دقیق، جای‌گیری هوشمندانه و توانایی خواندن بازی شناخته می‌شد. سبک دفاعی او نشان می‌داد که دفاع فقط به قدرت بدنی وابسته نیست.</p>
+      </article>
+      <article class="lm-card">
+        <h3>THE MILAN CAPTAIN</h3>
+        <p>سال‌ها کاپیتانی میلان، جایگاه ویژه‌ای برای او در تاریخ باشگاه ساخت. او در دوران حضورش شاهد نسل‌های مختلفی از بازیکنان بود و نقش مهمی در حفظ هویت تیم داشت.</p>
+      </article>
+      <article class="lm-card">
+        <h3>EUROPEAN GLORY</h3>
+        <p>مالدینی پنج بار قهرمانی جام باشگاه‌های اروپا و لیگ قهرمانان اروپا را تجربه کرد؛ افتخاری که بخش مهمی از میراث ورزشی اوست.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="lm-section">
+    <h2>THE LEGACY OF BUFFON</h2>
+    <div class="lm-grid">
+      <article class="lm-card">
+        <h3>THE LAST WALL</h3>
+        <p>بوفون با واکنش‌های سریع، تمرکز و اعتمادبه‌نفس خود دروازه‌بانی را به نمایش می‌گذاشت که می‌توانست در لحظات حساس، سرنوشت مسابقه را تغییر دهد.</p>
+      </article>
+      <article class="lm-card">
+        <h3>WORLD CHAMPION</h3>
+        <p>او همراه تیم ملی ایتالیا در سال ۲۰۰۶ قهرمان جام جهانی شد و یکی از مهم‌ترین چهره‌های آن نسل از فوتبال ایتالیا بود.</p>
+      </article>
+      <article class="lm-card">
+        <h3>AN EXTRAORDINARY CAREER</h3>
+        <p>حضور طولانی در سطح اول فوتبال، استمرار و عملکرد قابل‌توجه، بوفون را به یکی از شناخته‌شده‌ترین دروازه‌بان‌های نسل خود تبدیل کرد.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="lm-section">
+    <h2>THE TROPHY ROOM</h2>
+    <div class="lm-grid">
+      <article class="lm-card">
+        <h3>PAOLO MALDINI</h3>
+        <p class="lm-number">5</p>
+        <p>قهرمانی در جام باشگاه‌های اروپا / لیگ قهرمانان اروپا</p>
+        <p class="lm-number">7</p>
+        <p>قهرمانی سری آ ایتالیا</p>
+      </article>
+      <article class="lm-card">
+        <h3>GIANLUIGI BUFFON</h3>
+        <p class="lm-number">1</p>
+        <p>قهرمانی جام جهانی ۲۰۰۶</p>
+        <p class="lm-number">10</p>
+        <p>قهرمانی سری آ با یوونتوس</p>
+      </article>
+    </div>
+    <p style="font-size:12px;color:#a99b7d">افتخارات منتخب؛ آمار بر اساس رقابت‌ها و تعریف هر عنوان ممکن است متفاوت باشد.</p>
+  </div>
+
+  <div class="lm-section">
+    <h2>THE CINEMA</h2>
+    <div class="lm-film">
+      <h3>MALDINI — THE DEFENSIVE MASTER</h3>
+      <p>ویدئوها و مستندهای مربوط به دوران حرفه‌ای مالدینی.</p>
+      <a href="https://www.youtube.com/results?search_query=Paolo+Maldini+documentary+interview" target="_blank" rel="noopener">EXPLORE MALDINI VIDEOS ↗</a>
+    </div>
+    <div class="lm-film">
+      <h3>BUFFON — THE LEGENDARY GOALKEEPER</h3>
+      <p>مصاحبه‌ها، لحظات تاریخی و مستندهای بوفون.</p>
+      <a href="https://www.youtube.com/results?search_query=Gianluigi+Buffon+documentary+interview" target="_blank" rel="noopener">EXPLORE BUFFON VIDEOS ↗</a>
+    </div>
+    <div class="lm-film">
+      <h3>TWO LEGENDS — ONE FOOTBALL HISTORY</h3>
+      <p>ویدئوهای مشترک و مقایسه‌های تاریخی.</p>
+      <a href="https://www.youtube.com/results?search_query=Maldini+Buffon+football+legends" target="_blank" rel="noopener">EXPLORE TOGETHER ↗</a>
+    </div>
+  </div>
+
+  <div class="lm-footer">
+    <h3>THE LEGENDS NEVER FADE</h3>
+    <p>PAOLO MALDINI · GIANLUIGI BUFFON</p>
+    <p>AN UNOFFICIAL FAN-MADE DIGITAL MUSEUM</p>
+  </div>
+
+</section>
+
+<script>
+(() => {
+  const root = document.getElementById('legends-museum');
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = 'yes';
+
+  const enter = root.querySelector('#lm-enter');
+  const stage = root.querySelector('#lm-stage');
+  const sound = root.querySelector('#lm-sound');
+
+  const exhibits = [
+    ['PAOLO MALDINI', 'THE ART OF DEFENDING'],
+    ['GIANLUIGI BUFFON', 'THE WALL OF ITALY'],
+    ['THE LEGENDS', 'TWO CAREERS · ONE LEGACY']
+  ];
+  let current = 0;
+
+  function showExhibit() {
+    stage.querySelector('strong').textContent = exhibits[current][0];
+    stage.querySelector('span').textContent = exhibits[current][1];
+    stage.style.transform = 'rotateX(5deg) scale(.97)';
+    setTimeout(() => {
+      stage.style.transform = 'rotateX(3deg) scale(1)';
+    }, 180);
+  }
+
+  root.querySelector('#lm-next').addEventListener('click', () => {
+    current = (current + 1) % exhibits.length;
+    showExhibit();
+  });
+
+  root.querySelector('#lm-prev').addEventListener('click', () => {
+    current = (current + exhibits.length - 1) % exhibits.length;
+    showExhibit();
+  });
+
+  enter.addEventListener('click', () => {
+    root.querySelector('.lm-section').scrollIntoView({
+      behavior:'smooth', block:'start'
+    });
+  });
+
+  // ORIGINAL CINEMATIC SYNTH SOUNDTRACK
+  let audio = null;
+  let timer = null;
+  let step = 0;
+  let master = null;
+  let enabled = false;
+
+  const chords = [
+    [146.83, 220, 293.66, 349.23],
+    [116.54, 174.61, 233.08, 293.66],
+    [174.61, 220, 261.63, 349.23],
+    [130.81, 196, 261.63, 329.63]
+  ];
+
+  function note(freq, duration, volume, type='sine') {
+    if (!audio || !master) return;
+
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    const now = audio.currentTime;
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.06);
+    gain.gain.exponentialRampToValueAtTime(
+      0.001, now + duration
+    );
+
+    osc.connect(gain);
+    gain.connect(master);
+    osc.start(now);
+    osc.stop(now + duration + 0.1);
+  }
+
+  function musicStep() {
+    const bar = Math.floor(step / 8) % 4;
+    const beat = step % 8;
+    const chord = chords[bar];
+
+    if (beat === 0) {
+      note(chord[0] / 2, 2.3, 0.10, 'triangle');
+
+      chord.forEach((frequency) => {
+        note(frequency, 2.7, 0.018, 'sawtooth');
+      });
+    }
+
+    const melody = [
+      chord[0] * 2,
+      chord[2] * 2,
+      chord[1] * 2,
+      chord[3] * 2,
+      chord[2] * 2,
+      chord[1] * 2,
+      chord[2] * 2,
+      chord[3] * 2
+    ];
+
+    note(melody[beat], 0.42, 0.045, 'triangle');
+
+    if (beat === 0 || beat === 4) {
+      note(65.41, 0.2, 0.075, 'sine');
+    }
+
+    step++;
+  }
+
+  sound.addEventListener('click', async () => {
+    if (!enabled) {
+      try {
+        const AudioContext =
+          window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) {
+          sound.textContent = 'AUDIO NOT SUPPORTED';
+          return;
+        }
+
+        audio = new AudioContext();
+        await audio.resume();
+
+        master = audio.createGain();
+        master.gain.value = 0.35;
+        master.connect(audio.destination);
+
+        step = 0;
+        musicStep();
+        timer = setInterval(musicStep, 333);
+
+        enabled = true;
+        sound.textContent = '♫ SOUND: ON';
+      } catch (error) {
+        sound.textContent = 'AUDIO UNAVAILABLE';
+      }
+    } else {
+      clearInterval(timer);
+      if (audio) await audio.close();
+
+      audio = null;
+      master = null;
+      enabled = false;
+      sound.textContent = '♫ SOUND: OFF';
+    }
+  });
+})();
+</script>
+
 <!-- END OF DIGITAL LEGENDS MUSEUM -->
 
 <section id="archive">
