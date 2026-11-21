@@ -1601,6 +1601,336 @@ button {position:fixed;bottom:20px;left:20px;border:1px solid var(--gold);backgr
 })();
 </script>
 
+<style>
+#free3d-museum {
+  position: relative;
+  margin: 35px 0;
+  padding: 18px;
+  background: #090b10;
+  color: #f5d58a;
+  border: 1px solid #80652e;
+  border-radius: 15px;
+  font-family: Arial, sans-serif;
+}
+#free3d-museum h2 {
+  text-align: center;
+  letter-spacing: 2px;
+}
+#free3d-museum p {
+  text-align: center;
+  color: #c6b994;
+}
+#free3d-view {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  border: 1px solid #9b7938;
+  border-radius: 12px;
+  background: #111;
+  touch-action: none;
+}
+#free3d-view canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#free3d-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+#free3d-joy {
+  width: 112px;
+  height: 112px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #29251c;
+  border: 2px solid #a98745;
+  position: relative;
+  touch-action: none;
+}
+#free3d-knob {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #d3ad60;
+  left: 33px;
+  top: 33px;
+  pointer-events: none;
+}
+#free3d-help {
+  font-size: 13px;
+  line-height: 1.8;
+  flex: 1;
+}
+#free3d-museum button {
+  background: #9b7938;
+  color: #090b10;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: bold;
+}
+@media(max-width:600px) {
+  #free3d-view { height: 430px; }
+  #free3d-controls { align-items: center; }
+}
+</style>
+
+<section id="free3d-museum">
+  <h2>THE IMMORTAL 3D HALL</h2>
+  <p>قدم به دنیای سه‌بعدی اسطوره‌ها بگذار</p>
+
+  <div id="free3d-view"></div>
+
+  <div id="free3d-controls">
+    <div id="free3d-joy">
+      <div id="free3d-knob"></div>
+    </div>
+    <div id="free3d-help">
+      <b>حرکت:</b> جوی‌استیک سمت چپ<br>
+      <b>چرخش دوربین:</b> انگشتت را روی تصویر بکش<br>
+      <b>کامپیوتر:</b> کلیدهای WASD و کشیدن ماوس
+    </div>
+  </div>
+  <p id="free3d-status">در حال آماده‌سازی سالن...</p>
+</section>
+
+<script type="module">
+import * as THREE from
+'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+const root = document.getElementById('free3d-view');
+const status = document.getElementById('free3d-status');
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x090b10);
+scene.fog = new THREE.Fog(0x090b10, 13, 28);
+
+const camera = new THREE.PerspectiveCamera(
+  72, root.clientWidth / root.clientHeight, 0.1, 100
+);
+camera.position.set(0, 1.7, 8);
+camera.rotation.order = 'YXZ';
+
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  powerPreference: 'low-power'
+});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+renderer.setSize(root.clientWidth, root.clientHeight);
+renderer.shadowMap.enabled = false;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+root.appendChild(renderer.domElement);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x302010, 2));
+
+const goldLight = new THREE.PointLight(0xffc45c, 35, 18);
+goldLight.position.set(0, 5, -3);
+scene.add(goldLight);
+
+const warmLight = new THREE.PointLight(0xffe2a0, 20, 16);
+warmLight.position.set(-5, 3, 2);
+scene.add(warmLight);
+
+function material(color, metalness = 0, roughness = 0.7) {
+  return new THREE.MeshStandardMaterial({
+    color, metalness, roughness
+  });
+}
+
+function block(w, h, d, x, y, z, color, metal = 0) {
+  const mesh = new THREE.Mesh(
+    new THREE.BoxGeometry(w, h, d),
+    material(color, metal)
+  );
+  mesh.position.set(x, y, z);
+  scene.add(mesh);
+  return mesh;
+}
+
+// کف و سقف
+block(20, 0.3, 26, 0, -0.2, -2, 0x24201a, 0.25);
+block(20, 0.3, 26, 0, 6, -2, 0x171717);
+
+// دیوارها
+block(0.3, 6, 26, -10, 2.8, -2, 0x28231c);
+block(0.3, 6, 26, 10, 2.8, -2, 0x28231c);
+block(20, 6, 0.3, 0, 2.8, -15, 0x30271c);
+block(20, 6, 0.3, 0, 2.8, 11, 0x30271c);
+
+// ستون‌های سالن
+for (let z = -12; z <= 8; z += 5) {
+  for (const x of [-8, 8]) {
+    block(0.8, 5.3, 0.8, x, 2.5, z, 0x65502d, 0.65);
+    block(1.2, 0.3, 1.2, x, 5.2, z, 0xb18a43, 0.7);
+    block(1.2, 0.3, 1.2, x, 0.1, z, 0xb18a43, 0.7);
+  }
+}
+
+// سکوی مرکزی
+block(3.4, 0.6, 3.4, 0, 0.25, -4, 0x80602b, 0.7);
+block(2.5, 1.4, 2.5, 0, 1.1, -4, 0x25211b, 0.5);
+
+// جام سه‌بعدی آزمایشی
+const gold = material(0xd6a63e, 0.85, 0.2);
+const cup = new THREE.Group();
+
+const bowl = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.35, 0.75, 0.8, 32),
+  gold
+);
+cup.add(bowl);
+
+const stem = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.12, 0.16, 0.85, 20),
+  gold
+);
+stem.position.y = -0.8;
+cup.add(stem);
+
+const base = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.48, 0.55, 0.22, 24),
+  gold
+);
+base.position.y = -1.3;
+cup.add(base);
+
+cup.position.set(0, 3.4, -4);
+scene.add(cup);
+
+// نورهای تزئینی
+for (let z = -12; z < 9; z += 4) {
+  const light = new THREE.PointLight(0xffc76b, 8, 7);
+  light.position.set(0, 4.8, z);
+  scene.add(light);
+}
+
+// کنترل دوربین
+let yaw = 0;
+let pitch = 0;
+const keys = {};
+let moveX = 0;
+let moveY = 0;
+let lookPointer = null;
+let lastX = 0;
+let lastY = 0;
+
+window.addEventListener('keydown', e => {
+  keys[e.key.toLowerCase()] = true;
+});
+window.addEventListener('keyup', e => {
+  keys[e.key.toLowerCase()] = false;
+});
+
+root.addEventListener('pointerdown', e => {
+  if (e.clientX < root.getBoundingClientRect().left +
+      root.clientWidth * 0.35) return;
+  lookPointer = e.pointerId;
+  lastX = e.clientX;
+  lastY = e.clientY;
+  root.setPointerCapture(e.pointerId);
+});
+
+root.addEventListener('pointermove', e => {
+  if (lookPointer !== e.pointerId) return;
+  yaw -= (e.clientX - lastX) * 0.004;
+  pitch -= (e.clientY - lastY) * 0.004;
+  pitch = Math.max(-1.15, Math.min(1.15, pitch));
+  lastX = e.clientX;
+  lastY = e.clientY;
+});
+
+function stopLook(e) {
+  if (lookPointer === e.pointerId) lookPointer = null;
+}
+root.addEventListener('pointerup', stopLook);
+root.addEventListener('pointercancel', stopLook);
+
+// جوی‌استیک لمسی
+const joy = document.getElementById('free3d-joy');
+const knob = document.getElementById('free3d-knob');
+let joyPointer = null;
+
+joy.addEventListener('pointerdown', e => {
+  joyPointer = e.pointerId;
+  joy.setPointerCapture(e.pointerId);
+  updateJoy(e);
+});
+
+joy.addEventListener('pointermove', e => {
+  if (joyPointer === e.pointerId) updateJoy(e);
+});
+
+function updateJoy(e) {
+  const rect = joy.getBoundingClientRect();
+  const dx = e.clientX - (rect.left + rect.width / 2);
+  const dy = e.clientY - (rect.top + rect.height / 2);
+  const distance = Math.min(32, Math.hypot(dx, dy));
+  const angle = Math.atan2(dy, dx);
+  const x = Math.cos(angle) * distance;
+  const y = Math.sin(angle) * distance;
+
+  knob.style.transform = `translate(${x}px, ${y}px)`;
+  moveX = x / 32;
+  moveY = y / 32;
+}
+
+function releaseJoy(e) {
+  if (joyPointer !== e.pointerId) return;
+  joyPointer = null;
+  moveX = 0;
+  moveY = 0;
+  knob.style.transform = 'translate(0,0)';
+}
+joy.addEventListener('pointerup', releaseJoy);
+joy.addEventListener('pointercancel', releaseJoy);
+
+let previous = performance.now();
+
+function animate(now) {
+  requestAnimationFrame(animate);
+  const delta = Math.min((now - previous) / 1000, 0.04);
+  previous = now;
+
+  const forward =
+    moveY + (keys['w'] || keys['arrowup'] ? -1 : 0) +
+    (keys['s'] || keys['arrowdown'] ? 1 : 0);
+
+  const sideways =
+    moveX + (keys['d'] || keys['arrowright'] ? 1 : 0) -
+    (keys['a'] || keys['arrowleft'] ? 1 : 0);
+
+  const speed = 4 * delta;
+
+  camera.position.x +=
+    (Math.sin(yaw) * -forward + Math.cos(yaw) * sideways) * speed;
+  camera.position.z +=
+    (-Math.cos(yaw) * -forward - Math.sin(yaw) * sideways) * speed;
+
+  camera.position.x = THREE.MathUtils.clamp(camera.position.x, -8.8, 8.8);
+  camera.position.z = THREE.MathUtils.clamp(camera.position.z, -13.5, 9.5);
+
+  camera.rotation.set(pitch, yaw, 0);
+  cup.rotation.y += delta * 0.35;
+
+  renderer.render(scene, camera);
+}
+
+requestAnimationFrame(animate);
+status.textContent = 'سالن آماده است؛ حرکت کن و اطراف را ببین.';
+
+window.addEventListener('resize', () => {
+  camera.aspect = root.clientWidth / root.clientHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(root.clientWidth, root.clientHeight);
+});
+</script>
+
 <!-- END OF DIGITAL LEGENDS MUSEUM -->
 
 <section id="archive">
