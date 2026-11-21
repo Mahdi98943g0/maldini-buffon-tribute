@@ -442,6 +442,306 @@ footer p{font-size:.82rem;color:var(--muted);max-width:760px;margin:10px auto}
 </div>
 </main>
 
+<style>
+.archive-section {
+  padding: 65px 18px;
+  background:
+    radial-gradient(ellipse at top, #252016 0%, #101116 55%, #090a0e 100%);
+  color: #f2ead8;
+  text-align: center;
+  font-family: inherit;
+}
+.archive-container {
+  max-width: 1050px;
+  margin: auto;
+}
+.archive-kicker {
+  color: #d8bd75;
+  letter-spacing: 3px;
+  font-size: 11px;
+  font-weight: bold;
+}
+.archive-title {
+  font-size: clamp(27px, 6vw, 48px);
+  margin: 14px 0;
+  letter-spacing: 1px;
+}
+.archive-intro {
+  color: #b9b5aa;
+  line-height: 2;
+  max-width: 680px;
+  margin: 0 auto 35px;
+  font-size: 14px;
+}
+.archive-divider {
+  width: 75px;
+  height: 2px;
+  background: #d8bd75;
+  margin: 22px auto;
+}
+.archive-player {
+  border: 1px solid #65532c;
+  background: linear-gradient(145deg, #1d1b17, #101116);
+  border-radius: 14px;
+  padding: 24px 18px;
+  margin: 25px 0;
+  text-align: right;
+  box-shadow: 0 10px 35px #0005;
+}
+.archive-player h3 {
+  color: #e3c77d;
+  font-size: 23px;
+  text-align: center;
+  margin: 8px 0;
+}
+.archive-player-subtitle {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 22px;
+}
+.archive-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin: 20px 0;
+}
+.archive-stat {
+  background: #ffffff08;
+  border: 1px solid #ffffff12;
+  border-radius: 9px;
+  padding: 13px 5px;
+  text-align: center;
+}
+.archive-stat strong {
+  display: block;
+  color: #e3c77d;
+  font-size: 20px;
+}
+.archive-stat span {
+  color: #b8b5ac;
+  font-size: 10px;
+}
+.archive-chapter {
+  border: 1px solid #39352c;
+  border-radius: 9px;
+  margin: 10px 0;
+  background: #ffffff05;
+  overflow: hidden;
+}
+.archive-chapter summary {
+  cursor: pointer;
+  padding: 15px 13px;
+  color: #e8d49e;
+  font-size: 14px;
+  font-weight: bold;
+  list-style-position: inside;
+}
+.archive-chapter p {
+  color: #c2beb4;
+  line-height: 2;
+  font-size: 13px;
+  padding: 0 15px 14px;
+  margin: 0;
+}
+.archive-status {
+  color: #d8bd75;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: block;
+}
+.archive-link {
+  display: inline-block;
+  color: #e3c77d;
+  border: 1px solid #9c8144;
+  border-radius: 7px;
+  padding: 10px 18px;
+  text-decoration: none;
+  margin-top: 15px;
+  font-size: 12px;
+}
+.archive-link:hover {
+  background: #d8bd75;
+  color: #111;
+}
+.archive-note {
+  color: #88857e;
+  font-size: 11px;
+  line-height: 2;
+  margin-top: 28px;
+}
+@media(max-width:420px) {
+  .archive-stat-grid { gap: 5px; }
+  .archive-stat strong { font-size: 17px; }
+  .archive-stat span { font-size: 9px; }
+}
+</style>
+
+<section class="archive-section" id="legends-archive">
+  <div class="archive-container">
+
+    <span class="archive-kicker">A LEGACY BEYOND TIME</span>
+
+    <h2 class="archive-title">THE LEGENDS ARCHIVE</h2>
+
+    <div class="archive-divider"></div>
+
+    <p class="archive-intro" dir="rtl">
+      به آرشیو تاریخی دو تن از بزرگ‌ترین چهره‌های تاریخ فوتبال خوش آمدید.
+      اینجا داستان زندگی، دوران حرفه‌ای، مسابقات، افتخارات و میراث
+      پائولو مالدینی و جان‌لوئیجی بوفون را فصل‌به‌فصل دنبال می‌کنیم.
+    </p>
+
+    <!-- PAOLO MALDINI -->
+
+    <div class="archive-player" id="maldini-archive">
+
+      <span class="archive-status">LEGEND ARCHIVE · ITALY</span>
+
+      <h3>PAOLO MALDINI</h3>
+
+      <p class="archive-player-subtitle" dir="rtl">
+        پائولو مالدینی · مدافع افسانه‌ای میلان
+      </p>
+
+      <div class="archive-stat-grid">
+        <div class="archive-stat">
+          <strong>1968</strong>
+          <span>سال تولد</span>
+        </div>
+        <div class="archive-stat">
+          <strong>1985</strong>
+          <span>اولین بازی رسمی سری آ</span>
+        </div>
+        <div class="archive-stat">
+          <strong>3</strong>
+          <span>شماره پیراهن مشهور</span>
+        </div>
+      </div>
+
+      <details class="archive-chapter">
+        <summary>فصل اول · زندگی و خانواده</summary>
+        <p dir="rtl">
+          تولد در میلان، خانواده مالدینی، پدرش چزاره،
+          دوران کودکی و مسیر شکل‌گیری شخصیت او.
+        </p>
+      </details>
+
+      <details class="archive-chapter">
+        <summary>فصل دوم · کودکی و عشق به فوتبال</summary>
+        <p dir="rtl">
+          نخستین علاقه به فوتبال، بازی با دوستان،
+          خاطرات کودکی و تأثیر خانواده بر مسیر زندگی او.
+        </p>
+      </details>
+
+      <details class="archive-chapter">
+        <summary>فصل سوم · آکادمی میلان</summary>
+        <p dir="rtl">
+          ورود به آکادمی میلان در سال ۱۹۷۸،
+          تغییر پست از مهاجم کناری به مدافع راست،
+          تمرینات جوانان و نخستین حضور در تیم بزرگسالان.
+        </p>
+      </details>
+
+      <details class="archive-chapter">
+        <summary>فصل چهارم · نخستین بازی رسمی</summary>
+        <p dir="rtl">
+          مسابقه تاریخی مقابل اودینزه در ۲۰ ژانویه ۱۹۸۵؛
+          آغاز رسمی دوران حرفه‌ای مالدینی در سری آ.
+          جزئیات ترکیب، تعویض‌ها و گزارش مسابقه در حال تکمیل است.
+        </p>
+      </details>
+
+      <details class="archive-chapter">
+        <summary>فصل‌های بعدی · دوران حرفه‌ای و میراث</summary>
+        <p dir="rtl">
+          فصل‌به‌فصل میلان، لیگ قهرمانان اروپا،
+          تیم ملی ایتالیا، جام جهانی، افتخارات،
+          مصدومیت‌ها، رکوردها و آخرین مسابقه.
+        </p>
+      </details>
+
+      <a class="archive-link" href="#maldini-life">
+        مشاهده بخش زندگی مالدینی
+      </a>
+
+    </div>
+
+    <!-- GIANLUIGI BUFFON -->
+
+    <div class="archive-player" id="buffon-archive">
+
+      <span class="archive-status">LEGEND ARCHIVE · ITALY</span>
+
+      <h3>GIANLUIGI BUFFON</h3>
+
+      <p class="archive-player-subtitle" dir="rtl">
+        جان‌لوئیجی بوفون · دروازه‌بان افسانه‌ای ایتالیا
+      </p>
+
+      <div class="archive-stat-grid">
+        <div class="archive-stat">
+          <strong>1978</strong>
+          <span>سال تولد</span>
+        </div>
+        <div class="archive-stat">
+          <strong>2006</strong>
+          <span>قهرمانی جام جهانی</span>
+        </div>
+        <div class="archive-stat">
+          <strong>1</strong>
+          <span>شماره مشهور</span>
+        </div>
+      </div>
+
+      <details class="archive-chapter">
+        <summary>فصل اول · زندگی و خانواده</summary>
+        <p dir="rtl">
+          تولد، خانواده، دوران کودکی و نخستین سال‌های زندگی بوفون.
+        </p>
+      </details>
+
+      <details class="archive-chapter">
+        <summary>فصل دوم · آغاز مسیر فوتبال</summary>
+        <p dir="rtl">
+          علاقه به فوتبال، انتخاب دروازه‌بانی و ورود به فوتبال حرفه‌ای.
+        </p>
+      </details>
+
+      <details class="archive-chapter">
+        <summary>فصل سوم · پارما</summary>
+        <p dir="rtl">
+          شروع دوران حرفه‌ای، مسابقات مهم، افتخارات و درخشش در پارما.
+        </p>
+      </details>
+
+      <details class="archive-chapter">
+        <summary>فصل‌های بعدی · یوونتوس و تیم ملی</summary>
+        <p dir="rtl">
+          دوران یوونتوس، جام جهانی ۲۰۰۶، رکوردها،
+          بازگشت به پارما و پایان دوران بازی.
+        </p>
+      </details>
+
+      <span class="archive-status">ARCHIVE CONTENT IN PROGRESS</span>
+
+      <a class="archive-link" href="#buffon">
+        مشاهده بخش زندگی بوفون
+      </a>
+
+    </div>
+
+    <p class="archive-note" dir="rtl">
+      این آرشیو به‌تدریج با اطلاعات مستند، تصاویر تاریخی،
+      آمار مسابقات و منابع معتبر تکمیل خواهد شد.
+      اطلاعات تأییدنشده به‌عنوان واقعیت قطعی منتشر نمی‌شوند.
+    </p>
+
+  </div>
+</section>
+
 <footer>
   <strong>THE LEGENDS NEVER FADE</strong>
   <p>Unofficial fan-made website dedicated to Paolo Maldini and Gianluigi Buffon.</p>
